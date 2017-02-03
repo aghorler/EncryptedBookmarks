@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Encrypted Bookmarks</title>
+		<style>
+			#footer{
+				position: fixed;
+				bottom: 0;
+				width: 100%;
+				color: grey;
+			}
+		</style>
+	</head>
+	<body>
+		<h3>Encrypted Bookmarks</h3>
+
+		<div id="create-password">
+			<h4>Create your encryption password</h4>
+
+			<p>
+				This password will be used to encrypt your private bookmarks. <br>
+				Please note:
+
+				<ul>
+					<li>Recovery is impossible if you forget this password.</li>
+					<li>This password cannot be changed.</li>
+					<li>This password must be entered each time a bookmark is saved.</li>
+				</ul>
+			</p>
+
+			<p>
+				Password: <input type="password" id="new-password">
+			</p>
+			<p>
+				Password (repeat): <input type="password" id="new-password-repeat">
+			</p>
+
+			<p>
+				<button id="setup-account">Confirm password</button>
+			</p>
+		</div>
+
+		<div id="submit">
+			<p>
+				Password: <input type="password" id="password">
+			</p>
+
+			<p>
+				<button id="decrypt">Decrypt</button>
+			</p>
+		</div>
+
+		<p id="content"></p>
+
+		<div id="footer">
+			<hr>
+
+			<p>
+				Developed by Aaron Horler (aghorler) | <a href="#">GitHub source</a>
+			</p>
+		</div>
+
+		<script src="/js/process.js"></script>
+		<script src="/components/core-min.js"></script>
+		<script src="/rollups/sha1.js"></script>
+		<script src="/rollups/sha512.js"></script>
+		<script src="/components/enc-base64-min.js"></script>
+		<script src="/components/enc-utf16-min.js"></script>
+		<script src="/rollups/aes.js"></script>
+	</body>
+</html>
