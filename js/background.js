@@ -6,14 +6,14 @@ chrome.runtime.onInstalled.addListener(function(details){
 		var context = "page";
 		chrome.contextMenus.create({"title": "Add to Encrypted Bookmarks", "contexts":[context], "id": "context" + context}); 
 
-		chrome.tabs.create({ url: "chrome-extension://jokeakfccpmkimampedkcgfkioekjkjm/html/bookmarks.html" });
+		chrome.tabs.create({ url: "/html/bookmarks.html" });
 	}
 });
 
 chrome.contextMenus.onClicked.addListener(encryptionPasswordVerify);
 
 chrome.browserAction.onClicked.addListener(function(){
-	chrome.tabs.create({ url: "chrome-extension://jokeakfccpmkimampedkcgfkioekjkjm/html/bookmarks.html" });
+	chrome.tabs.create({ url: "/html/bookmarks.html" });
 });
 
 function encryptionPasswordVerify(){
@@ -30,7 +30,7 @@ function encryptionPasswordVerify(){
 			}
 		}
 		else{
-			chrome.tabs.create({ url: "chrome-extension://jokeakfccpmkimampedkcgfkioekjkjm/html/bookmarks.html" });
+			chrome.tabs.create({ url: "/html/bookmarks.html" });
 		}
 	});
 }

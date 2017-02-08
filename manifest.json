@@ -1,10 +1,10 @@
 {
 	"name": "Encrypted Bookmarks",
-	"version": "1.0.0",
+	"version": "1.0.1.3191",
 	"manifest_version": 2,
 	"description": "Store private bookmarks encrypted in Chrome's local storage.",
 	"background": {
-		"scripts": ["/components/core-min.js", "/rollups/sha1.js", "/rollups/sha512.js", "/rollups/aes.js", "/components/enc-base64-min.js", "/components/enc-utf16-min.js", "/js/background.js"],
+		"scripts": ["/crypto-js-3.1.9-1/crypto-js.js", "/js/background.js"],
 		"persistent": false
 	},
 	"icons": {

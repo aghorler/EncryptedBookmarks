@@ -100,6 +100,10 @@ function deleteBookmark(){
 		chrome.storage.local.set({bookmarks: items.bookmarks});
 
 		document.getElementById("b" + index).style.display = 'none';
+
+		if(testing['bookmarks'].length == 0){
+			document.getElementById("content").textContent = "You have no bookmarks. Create some using the right-click context menu on any page.";
+		}
 	});
 }
 
