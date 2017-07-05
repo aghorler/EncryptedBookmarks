@@ -5,9 +5,9 @@
 The permissions Encrypted Bookmarks requires on install are declared in the manifest.
 
     "permissions": [
-		  "contextMenus",
-		  "storage",
-      "tabs"
+		"contextMenus",
+		"storage",
+		"tabs"
     ]
 
 Each permission is required for the reasons set out below.
