@@ -1,33 +1,7 @@
-chrome.runtime.onInstalled.addListener(function(details){
-	if(details.reason == "install"){
-		var test = {"bookmarks": []};
-		chrome.storage.local.set({bookmarks: test});
-
-		var context = "page";
-		chrome.contextMenus.create({"title": "Add to Encrypted Bookmarks", "contexts":[context], "id": "context" + context}); 
-
-		chrome.tabs.create({ url: "/html/bookmarks.html" });
-	}
-});
-
-chrome.contextMenus.onClicked.addListener(encryptionPasswordVerify);
-
-chrome.browserAction.onClicked.addListener(function(){
-	chrome.tabs.create({ url: "/html/bookmarks.html" });
-});
-
-function encryptionPasswordVerify(){
-	chrome.storage.local.get('encryptionPassword', function(verify){
-		if(verify.encryptionPassword !== undefined){
-			var password = prompt("Encryption password", "");
-			var passwordHash = CryptoJS.SHA512(password).toString();
-
-			if(passwordHash == verify.encryptionPassword){
-				addBookmark(password);
-			}
-			else{
-				alert("Incorrect password.")
-			}
+function userVerify(){
+	chrome.storage.local.get('publicKey', function(verify){
+		if(verify.publicKey !== undefined){
+			addBookmark();
 		}
 		else{
 			chrome.tabs.create({ url: "/html/bookmarks.html" });
@@ -35,19 +9,37 @@ function encryptionPasswordVerify(){
 	});
 }
 
-function addBookmark(encryptionPassword){
-	chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function(tabItems){
-		chrome.storage.local.get('bookmarks', function(bookmarkItems){
+function addBookmark(){
+	chrome.tabs.query({
+		'active': true, 
+		'lastFocusedWindow': true
+	}, function(tabItems){
+		chrome.storage.local.get({
+			bookmarks: [], 
+			publicKey: ""
+		}, function(bookmarkItems){
 			var tempTitle = tabItems[0].title;
 			var title = prompt("Bookmark title", tempTitle);
 			if(title !== null){
-				var encryptedTitle = CryptoJS.AES.encrypt(title, encryptionPassword);
 				var url = tabItems[0].url;
-				var encryptedUrl = CryptoJS.AES.encrypt(url, encryptionPassword);
 
-				bookmarkItems.bookmarks['bookmarks'].push({"title": encryptedTitle, "url": encryptedUrl});
+				var optionsTitle = {
+					data: title,
+					publicKeys: openpgp.key.readArmored(bookmarkItems.publicKey).keys
+				};
 
-				chrome.storage.local.set({bookmarks: bookmarkItems.bookmarks});
+				openpgp.encrypt(optionsTitle).then(function(ciphertextTitle){
+					var optionsUrl = {
+						data: url,
+						publicKeys: openpgp.key.readArmored(bookmarkItems.publicKey).keys
+					};
+
+					openpgp.encrypt(optionsUrl).then(function(ciphertextUrl){
+						bookmarkItems.bookmarks['bookmarks'].push({"title": ciphertextTitle.data, "url": ciphertextUrl.data});
+
+						chrome.storage.local.set({bookmarks: bookmarkItems.bookmarks});
+					});
+				});
 			}
 			else{
 				alert("Title cannot be null.");
@@ -55,3 +47,20 @@ function addBookmark(encryptionPassword){
 		});
 	});
 }
+
+chrome.runtime.onInstalled.addListener(function(details){
+	if(details.reason == "install"){
+		chrome.storage.local.set({bookmarks: {"bookmarks": []}});
+
+		var context = "page";
+		chrome.contextMenus.create({"title": "Add to Encrypted Bookmarks", "contexts":[context], "id": "context" + context}); 
+
+		chrome.tabs.create({url: "/html/bookmarks.html"});
+	}
+});
+
+chrome.contextMenus.onClicked.addListener(userVerify);
+
+chrome.browserAction.onClicked.addListener(function(){
+	chrome.tabs.create({url: "/html/bookmarks.html"});
+});

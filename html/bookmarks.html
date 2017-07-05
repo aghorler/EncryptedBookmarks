@@ -18,14 +18,15 @@
 			<h4>Create your encryption password</h4>
 
 			<p>
-				This password will be used to encrypt your private bookmarks. <br>
+				Encrypted Bookmarks will generate a public and private key to, respectively, encrypt and decrypt your bookmarks. This password will encrypt your private key. <br>
 				Please note:
-
-				<ul>
-					<li>Recovery is impossible if you forget this password.</li>
-					<li>This password cannot be changed.</li>
-					<li>This password must be entered each time a bookmark is saved.</li>
-				</ul>
+				<p>
+					<ul>
+						<li>Recovery is impossible if you forget this password.</li>
+						<li>This password cannot be changed.</li>
+						<li>Make this password long to protect yourself against brute-force attacks.</li>
+					</ul>
+				</p>
 			</p>
 
 			<p>
@@ -61,6 +62,6 @@
 		</div>
 
 		<script src="/js/process.js"></script>
-		<script src="/crypto-js-3.1.9-1/crypto-js.js"></script>
+		<script src="/js/openpgp.min.js"></script>
 	</body>
 </html>
