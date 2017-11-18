@@ -1,21 +1,21 @@
 {
-	"name": "Encrypted Bookmarks",
-	"version": "2.0",
-	"manifest_version": 2,
-	"description": "Store private bookmarks encrypted in Chrome's local storage.",
-	"background": {
-		"scripts": ["/js/background.js", "/js/openpgp.min.js"],
-		"persistent": false
-	},
-	"icons": {
-		"128": "/img/icon128.png"
-	},
-	"browser_action": {
-		"name": "Open bookmarks."
-	},
-	"permissions": [
-		"contextMenus",
-		"storage",
-		"tabs"
-	]
+  "name": "Encrypted Bookmarks",
+  "version": "3.0",
+  "manifest_version": 2,
+  "description": "Store private bookmarks encrypted in Chrome's local storage.",
+  "background": {
+    "scripts": ["/js/background.js", "/vendor/openpgpjs/openpgp.min.js"],
+    "persistent": false
+  },
+  "icons": {
+    "128": "/img/icon128.png"
+  },
+  "browser_action": {
+    "name": "Open bookmarks."
+  },
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "tabs"
+  ]
 }

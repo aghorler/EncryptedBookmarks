@@ -1,67 +1,113 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<title>Encrypted Bookmarks</title>
-		<style>
-			#footer{
-				position: fixed;
-				bottom: 0;
-				width: 100%;
-				color: grey;
-			}
-		</style>
-	</head>
-	<body>
-		<h3>Encrypted Bookmarks</h3>
+<html lang="en">
 
-		<div id="create-password">
-			<h4>Create your encryption password</h4>
+  <head>
 
-			<p>
-				Encrypted Bookmarks will generate a public and private key to, respectively, encrypt and decrypt your bookmarks. This password will encrypt your private key. <br>
-				Please note:
-				<p>
-					<ul>
-						<li>Recovery is impossible if you forget this password.</li>
-						<li>This password cannot be changed.</li>
-						<li>Make this password long to protect yourself against brute-force attacks.</li>
-					</ul>
-				</p>
-			</p>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-			<p>
-				Password: <input type="password" id="new-password">
-			</p>
-			<p>
-				Password (repeat): <input type="password" id="new-password-repeat">
-			</p>
+    <meta name="author" content="Aaron Horler">
 
-			<p>
-				<button id="setup-account">Confirm password</button>
-			</p>
-		</div>
+    <title>Encrypted Bookmarks</title>
 
-		<div id="submit">
-			<p>
-				Password: <input type="password" id="password">
-			</p>
+    <!-- Bootstrap core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-			<p>
-				<button id="decrypt">Decrypt</button>
-			</p>
-		</div>
+    <!-- Custom styles for this template -->
+    <style>
+      body {
+        padding-top: 54px;
+      }
+      @media (min-width: 992px) {
+        body {
+          padding-top: 56px;
+        }
+      }
 
-		<p id="content"></p>
+    </style>
 
-		<div id="footer">
-			<hr>
+  </head>
 
-			<p>
-				Developed by Aaron Horler (aghorler) | <a href="https://github.com/aghorler/EncryptedBookmarks">GitHub source</a>
-			</p>
-		</div>
+  <body>
 
-		<script src="/js/process.js"></script>
-		<script src="/js/openpgp.min.js"></script>
-	</body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">Encrypted Bookmarks</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+          	<li class="nav-item">
+              <a class="nav-link" href="https://aaronhorler.com">Developed by Aaron Horler</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://github.com/aghorler/EncryptedBookmarks">Source</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <h2 class="mt-5"><strong>Encrypted Bookmarks</strong></h2><hr>
+        </div>
+
+        <div id="create-password" class="col-lg-12 text-center">
+          <h3 class="mt-5">Create your encryption password</h3><br>
+          <p class="info">Encrypted Bookmarks will generate a public and private key to, respectively, encrypt and decrypt your bookmarks. This password will encrypt your private key.</p>
+          <p class="info">Please note:</p>
+          <p class="info">
+            &bull; Recovery is impossible if you forget this password.<br>
+            &bull; This password cannot be changed.<br>
+            &bull; Make this password long to protect yourself against brute-force attacks.
+          </p>
+          <br>
+          <div class="form-group">
+            <p>
+              <label for="new-password">Password</label>
+              <input id="new-password" type="password" class="form-control" placeholder="Password">
+            </p>
+            <p>
+              <label for="new-password-repeat">Password (repeat)</label>
+              <input id="new-password-repeat" type="password" class="form-control" placeholder="Password (repeat)">
+            </p>
+            <p>
+              <button id="setup-account" class="btn-primary">Confirm password</button>
+            </p>
+          </div>
+        </div>
+
+        <div id="submit" class="col-lg-12 text-center">
+          <h3 class="mt-5">Decrypt bookmarks</h3><br>
+          <div class="form-group">
+            <p>
+              <label for="password">Password</label>
+              <input id="password" type="password" class="form-control" placeholder="Password">
+            </p>
+            <p>
+              <button id="decrypt" class="btn-primary">Decrypt</button>
+            </p>
+          </div>
+        </div>
+
+        <p id="content"></p>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script src="../vendor/openpgpjs/openpgp.min.js"></script>
+    <script src="../js/process.js"></script>
+
+  </body>
+
 </html>
